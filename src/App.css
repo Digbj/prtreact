@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+body{
+  background-color: rgb(225, 225, 225);
+}
+
+.header{
+  display: flex;
+  margin:30px;
+  /* padding: 50px; */
+  justify-content: space-between;
+}
+
+.input input{
+  margin-top: 0px;
+  width:350px;
+  font-size: large;
+  height: 30px;
+  border-radius: 15px;
+}
+.input button{
+  height: 35px;
+  /* padding: 3px; */
+  border-radius: 15px;
+  color: antiquewhite;
+  background-color: black;
+  /* gap:5px; */
+}
+.img-card{
+  display:flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between;
+  margin: 5px; */
+}
+.image{
+  height: 200px;
+  width: 200px;
+}
