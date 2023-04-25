@@ -1,53 +1,31 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import axios from 'axios'
-import Bookmark from "./bookmark";
+// import Bookmark from "./bookmark";
 import {Link} from 'react-router-dom'
+// import Bookmark from "./bookmark";
 const Home=()=>{
-const [input,setInput]=useState('');
-const [pic,setPic]=useState('')
-
-
-// const FetchApi = () => {
-    // setInput(input);
-    // const key = 'hnwjCvejHjbPxLnN6gcbaJs14TE8yeNnJ6t5yPiDAPA'
-    // const url = `https://api.unsplash.com/search/photos?page=1&query=${input}`
-    // const getPic = () => {
-    //     axios.get(url,{params:{client_id:key}})
-    //         .then((res) => setPic(res?.data?.results))
-    //         .catch((err) => { console.log(err) })
-           
-    //     // console.log(input,cate);
-        
-    // }
-    // getPic()
-
-// }
-
-
-
-// FetchApi()
-console.log(pic)
-
-
-useEffect(()=>{
-    setInput(input);
-    const key = 'hnwjCvejHjbPxLnN6gcbaJs14TE8yeNnJ6t5yPiDAPA'
-    const url = `https://api.unsplash.com/search/photos?page=1&query=${input}`
-    const getPic = () => {
-            axios.get(url,{params:{client_id:key}})
-            .then((res) => setPic(res?.data?.results))
-            .catch((err) => { console.log(err) })
-           
-        // console.log(input,cate);
-        
-    }
-    getPic()
-},[input])
+    const [input, setInput] = useState('');
+    const [pic, setPic] = useState([]);
+  
+    useEffect(() => {
+      const key = 'hnwjCvejHjbPxLnN6gcbaJs14TE8yeNnJ6t5yPiDAPA'
+      const url = `https://api.unsplash.com/search/photos?page=1&query=${input}`
+      const getPic = () => {
+        axios.get(url, { params: { client_id: key } })
+          .then((res) => setPic(res?.data?.results || []))
+          .catch((err) => { console.log(err) })
+      }
+      getPic()
+    }, [input])
 
 const Handler=()=>{
    
     console.log(pic)
+}
+
+const Bookmark=(img)=>{
+console.log(img)
 }
 
 
@@ -62,14 +40,14 @@ const Handler=()=>{
             <button onClick={Handler}>Search</button>
             <div className="img-card">
 
-{ pic.map((task, index) => {
-                    return <div key={index} className='pic'>
-                        <img className='image' key={task.id} src={task.urls.full} alt="pic" />
-                        <Link to='/bookmark' prop={task.urls.full} element={<Bookmark/>}><p >Bookmark</p></Link>
-
-                    </div>
-
-                })}
+            {pic.map((picObj, index) => (
+            <div key={index} className='pic'>
+              <img className='image' key={picObj.id} src={picObj.urls.full} alt="pic" />
+              
+                <button className="bkm" onClick={Bookmark(picObj.urls.full)} element={<Bookmark/>}>Bookmark</button>
+              
+            </div>
+          ))}
 
 
 
